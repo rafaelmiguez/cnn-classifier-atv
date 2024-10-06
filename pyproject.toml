@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "cnn_classifier"
+version = "0.1.0"
+description = ""
+authors = ["Rafael Santos <rafaelsantos32141@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+numpy = ">=1.26.0,<2.1.0"
+matplotlib = "^3.9.2"
+pillow = "^10.4.0"
+scikit-learn = "^1.5.2"
+tensorflow-io-gcs-filesystem = "0.31.0"
+tensorflow = "2.15.0"
+tensorflow-intel = {version="^2.15.0", platform = "win32"}
+
+[tool.poetry.scripts]
+preprocess = "cnn_classifier.preprocess:run"
+train = "cnn_classifier.train:run"
+predict = "cnn_classifier.predict:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
