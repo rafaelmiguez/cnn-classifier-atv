@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from keras import layers, models
 
-from params import random_state, epochs
+from params import random_state, epochs, optimizer, loss
 
 
 le = LabelEncoder()
@@ -62,8 +62,7 @@ def run():
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(num_classes, activation='softmax'))
 
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
 
     print('Training model...')
     model.fit(train_imgs_arr, train_labels, epochs=epochs)
