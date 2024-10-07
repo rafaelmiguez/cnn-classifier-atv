@@ -2,18 +2,24 @@
 
 Este é projeto de um pacote Python capaz de treinar um classificador CNN(Convolutional Neural Network) de imagens.
 
+# Obtenção de Imagens
+
+Sites como o [Kaggle](https://www.kaggle.com/) e [images.cv](https://images.cv/) podem ser usados para obter a base de dados das imagens. Note que pode ser interessante remover ou filtrar algumas imagens obtidas destes sites por não serem ideais para certas aplicações de ML.
+
 # Configuração de Parâmetros
 
 É possível configurar os parâmetros de pré-processamento e treino pelo arquivo `params.py`. Segue abaixo um exemplo desse arquivo.
 
 ```python
 color_mode = 'RGB'
+zoom_factor = 1.2
 img_size = 64
 random_state = 42
 epochs = 10
 ```
 
 * `color_mode`: Modo de cor das imagens pré-processadas. Pode ser 'L' para escala de cinza e 'RGB' para a escala RGB
+* `zoom_factor`: Fator de zoom, usado para aplicar efeito de zoom a imagens no pré-processamento. Deixe como 1 caso não deseje aplicar este efeito
 * `img_size`: Valor para o qual as imagens serão redimensionadas
 * `random_state`: Controla o embaralhamento aplicado aos dados antes de aplicar a divisão entre treino e teste. Útil para reproduzir a mesma saída em diferentes execuções
 * `epochs`: Quantidade de épocas do treinamento
