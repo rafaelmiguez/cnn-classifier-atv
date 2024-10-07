@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from keras import layers, models
 
-from params import random_state, epochs, optimizer, loss
+from params import epochs, optimizer, loss
 
 
 le = LabelEncoder()
@@ -39,7 +39,7 @@ def run():
     encoded_imgs_labels = le.fit_transform(imgs_labels)
 
     train_imgs_arr, test_imgs_arr, train_labels, test_labels = train_test_split(
-        imgs_arr, encoded_imgs_labels, test_size=0.2, random_state=random_state)
+        imgs_arr, encoded_imgs_labels, test_size=0.2)
     train_imgs_arr = train_imgs_arr / 255.0
     test_imgs_arr = test_imgs_arr / 255.0
 

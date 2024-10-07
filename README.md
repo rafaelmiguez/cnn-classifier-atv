@@ -15,7 +15,6 @@ color_mode = 'RGB'
 zoom_factor = 1.2
 img_size = 64
 
-random_state = 42
 optimizer = 'adam'
 loss = 'sparse_categorical_crossentropy'
 epochs = 10
@@ -24,7 +23,6 @@ epochs = 10
 * `color_mode`: Modo de cor das imagens pré-processadas. Pode ser 'L' para escala de cinza e 'RGB' para a escala RGB
 * `zoom_factor`: Fator de zoom, usado para aplicar efeito de zoom a imagens no pré-processamento. Deixe como 1 caso não deseje aplicar este efeito
 * `img_size`: Valor para o qual as imagens serão redimensionadas
-* `random_state`: Controla o embaralhamento aplicado aos dados antes de aplicar a divisão entre treino e teste. Útil para reproduzir a mesma saída em diferentes execuções
 * `optimizer`: Algoritmo usado para ajustar pesos do modelo durante treinamento. Ver mais [aqui](https://keras.io/api/optimizers/)
 * `loss`: Função de perda (ou função custo) que mede o quanto as previsões do modelo estão se afastando dos valores esperados. Ver mais [aqui](https://keras.io/api/losses/)
 * `epochs`: Quantidade de épocas do treinamento
