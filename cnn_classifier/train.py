@@ -4,9 +4,9 @@ import numpy as np
 from numpy.typing import NDArray
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from tensorflow import keras
+from keras import layers, models
 
-from params import random_state, img_size, epochs, color_mode
+from params import random_state, epochs
 
 
 le = LabelEncoder()
@@ -44,34 +44,31 @@ def run():
     test_imgs_arr = test_imgs_arr / 255.0
 
     print('Creating model...')
-    model = keras.models.Sequential([
-        # Camadas de convolução
-        keras.layers.Conv2D(32, (3, 3), activation='relu',
-                            input_shape=(img_size, img_size, 1 if color_mode == 'L' else 3)),
-        keras.layers.MaxPooling2D((2, 2)),
+    num_classes = len(os.listdir('imgs'))
+    model = models.Sequential()
 
-        keras.layers.Conv2D(64, (3, 3), activation='relu'),
-        keras.layers.MaxPooling2D((2, 2)),
+    # Camadas de convolução
+    model.add(layers.Conv2D(32, (3, 3), activation='relu',
+              input_shape=train_imgs_arr.shape[1:]))
+    model.add(layers.MaxPooling2D((2, 2)))
+    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
+    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
 
-        keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    # Linearização de array de output
+    model.add(layers.Flatten())
+    # Camadas finais densas
+    model.add(layers.Dense(64, activation='relu'))
+    model.add(layers.Dense(num_classes, activation='softmax'))
 
-        # Linearizar matriz para vetor 1d
-        keras.layers.Flatten(),
-
-        # Camadas totalmente conectadas (dense)
-        keras.layers.Dense(128, activation='relu'),
-        keras.layers.Dense(len(os.listdir('imgs')))
-    ])
-    model.compile(optimizer=keras.optimizers.Adam(),
-                  loss=keras.losses.SparseCategoricalCrossentropy(
-                      from_logits=True),
-                  metrics=['accuracy'])
+    model.compile(optimizer='adam',
+                  loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     print('Training model...')
     model.fit(train_imgs_arr, train_labels, epochs=epochs)
 
-    _, test_acc = model.evaluate(
-        test_imgs_arr,  test_labels, verbose=2)
+    _, test_acc = model.evaluate(test_imgs_arr, test_labels)
     print('\nTest accuracy:', test_acc)
 
     print('Exporting model...')
