@@ -40,8 +40,6 @@ def run():
 
     train_imgs_arr, test_imgs_arr, train_labels, test_labels = train_test_split(
         imgs_arr, encoded_imgs_labels, test_size=0.2)
-    # train_imgs_arr = train_imgs_arr / 255.0
-    # test_imgs_arr = test_imgs_arr / 255.0
 
     print('Creating model...')
     num_classes = len(os.listdir('imgs'))
