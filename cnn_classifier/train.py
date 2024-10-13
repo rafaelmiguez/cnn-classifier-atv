@@ -63,13 +63,12 @@ def run():
     model.add(layers.MaxPooling2D())
     model.add(layers.Conv2D(64, 3, activation='relu'))
     model.add(layers.MaxPooling2D())
-    model.add(layers.Conv2D(128, 3, activation='relu'))
-    model.add(layers.MaxPooling2D())
 
+    model.add(layers.Dropout(0.2))
     # Linearização de array de output
     model.add(layers.Flatten())
     # Camadas finais densas
-    model.add(layers.Dense(256, activation='relu'))
+    model.add(layers.Dense(128, activation='relu'))
     model.add(layers.Dense(num_classes, activation='softmax'))
 
     model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])

@@ -16,6 +16,7 @@ Pode ser necessário realizar um pré-processamento das imagens antes de usá-la
 * Codifique os `labels` das imagens caso não sejam numéricos. A função `LabelEncoder` da biblioteca `sklearn.preprocessing` pode ser usada para isso
 * Separe os dados em treino e teste. A função `train_test_split` da biblioteca `sklearn.model_selection` pode ser usada
 * Crie um modelo sequencial usando a classe `Sequential` da biblioteca `keras.models` e adicione as camadas de convolução usando a api `layers` da biblioteca `keras`
+  * É interessante inserir camadas de *data augmentation* como `layers.RandomFlip`, `layers.RandomRotation` e `layers.RandomZoom`, além de uma cadamada de *drop out* `layers.dropout` antes das camadas densas para evitar *overfitting.*
 * Compile o modelo passando os parâmetros desejados de `optimizer`, `loss` e `accuracy` usando o método `Sequential.compile`
 * Treine o modelo com os dados de treinamento definindo a quantiade de épocas usando o método `Sequential.fit`
 * Avalie o modelo usando o método `Sequential.evaluate`
@@ -26,4 +27,4 @@ Pode ser necessário realizar um pré-processamento das imagens antes de usá-la
 
 * [TensorFlow - Rede Neural Convolucional (CNN)](https://www.tensorflow.org/tutorials/images/cnn?hl=pt-br)
 * [Creating a CNN Model for Image Classification with TensorFlow](https://medium.com/@esrasoylu/creating-a-cnn-model-for-image-classification-with-tensorflow-49b84be8c12a)
-* [TensorFlow - Classificação de imagem](https://www.tensorflow.org/tutorials/images/classification?hl=pt-br#dropout)
+* [TensorFlow - Classificação de imagem](https://www.tensorflow.org/tutorials/images/classification?hl=pt-br)
