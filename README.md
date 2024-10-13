@@ -25,9 +25,9 @@ epochs = 10
 * `loss`: Função de perda (ou função custo) que mede o quanto as previsões do modelo estão se afastando dos valores esperados. Ver mais [aqui](https://keras.io/api/losses/)
 * `epochs`: Quantidade de épocas do treinamento
 
-As imagens de treinamento devem ser salvas na pasta `imgs`. Esta pasta deve conter subpastas que por sua vez conterão as imagens. O nome de cada subpasta irá representar o nome da classe das imagens contidas nela. Por padrão, a pasta `imgs` contem as subpastas `daisy`, `rose` e `sunflower`, contendo imagens de flores das respectivas classes.
+As imagens de treinamento devem ser salvas na pasta `imgs`. Esta pasta deve conter subpastas que por sua vez conterão as imagens. O nome de cada subpasta irá representar o nome da classe das imagens contidas nela. Por padrão, a pasta `imgs` contem as subpastas `daisy`, `rose` e `rapeseed`, contendo imagens de flores das respectivas classes.
 
-A pasta `predict_imgs` deve conter imagens definidas pelo usuário que serão usadas para testar o modelo pronto. Por padrão, esta pasta contém imagens de flores dos tipos `daisy`(margaridas), `rose`(rosas) e `sunflower`(girassóis).
+A pasta `predict_imgs` deve conter imagens definidas pelo usuário que serão usadas para testar o modelo pronto. Por padrão, esta pasta contém imagens de flores dos tipos `daisy`(margaridas), `rose`(rosas) e `rapeseed`(colzas).
 
 # Executando o Código
 
@@ -56,20 +56,20 @@ Este comando irá classificar as imagens geradas na pasta `predict_imgs`, printa
 ```
 daisy1.png: daisy
 daisy2.png: daisy
-daisy3.png: sunflower
-daisy4.png: rose
+daisy3.png: daisy
+daisy4.png: daisy
 daisy5.png: daisy
 daisy6.png: daisy
+rapeseed1.png: rapeseed
+rapeseed2.png: rapeseed
+rapeseed3.png: rapeseed
+rapeseed4.png: daisy
+rapeseed5.png: rapeseed
+rapeseed6.png: daisy
 rose1.png: rose
 rose2.png: rose
 rose3.png: rose
 rose4.png: rose
 rose5.png: rose
 rose6.png: rose
-sunflower1.png: sunflower
-sunflower2.png: sunflower
-sunflower3.png: rose
-sunflower4.png: sunflower
-sunflower5.png: daisy
-sunflower6.png: sunflower
 ```
