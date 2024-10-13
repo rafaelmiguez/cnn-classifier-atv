@@ -1,7 +1,8 @@
 import os
 from PIL import Image
 from params import img_size, color_mode
-from .utils import clear_folder, zoom_img
+from .utils import clear_folder
+
 
 def preprocess_imgs(src: str, dest: str):
     for filename in os.listdir(src):
@@ -10,8 +11,6 @@ def preprocess_imgs(src: str, dest: str):
             with Image.open(img_path) as img:
                 img = img.convert(color_mode)
                 img = img.resize((img_size, img_size))
-                img = zoom_img(img)
-
 
                 output_path = os.path.join(
                     dest, f'{os.path.splitext(filename)[0]}.jpg')

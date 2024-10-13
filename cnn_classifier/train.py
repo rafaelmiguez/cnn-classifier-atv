@@ -40,26 +40,39 @@ def run():
 
     train_imgs_arr, test_imgs_arr, train_labels, test_labels = train_test_split(
         imgs_arr, encoded_imgs_labels, test_size=0.2)
-    train_imgs_arr = train_imgs_arr / 255.0
-    test_imgs_arr = test_imgs_arr / 255.0
+    # train_imgs_arr = train_imgs_arr / 255.0
+    # test_imgs_arr = test_imgs_arr / 255.0
 
     print('Creating model...')
     num_classes = len(os.listdir('imgs'))
     model = models.Sequential()
 
+    input_shape = train_imgs_arr.shape[1:]
+    data_augmentation = models.Sequential(
+        [
+            layers.RandomFlip(
+                "horizontal", input_shape=input_shape),
+            layers.RandomRotation(0.1),
+            layers.RandomZoom(0.1),
+        ]
+    )
+    model.add(data_augmentation)
+    model.add(layers.Rescaling(1. / 255))
+
     # Camadas de convolução
-    model.add(layers.Conv2D(32, (3, 3), activation='relu',
-              input_shape=train_imgs_arr.shape[1:]))
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-    model.add(layers.MaxPooling2D((2, 2)))
+    model.add(layers.Conv2D(16, 3, activation='relu'))
+    model.add(layers.MaxPooling2D())
+    model.add(layers.Conv2D(32, 3, activation='relu'))
+    model.add(layers.MaxPooling2D())
+    model.add(layers.Conv2D(64, 3, activation='relu'))
+    model.add(layers.MaxPooling2D())
+    model.add(layers.Conv2D(128, 3, activation='relu'))
+    model.add(layers.MaxPooling2D())
 
     # Linearização de array de output
     model.add(layers.Flatten())
     # Camadas finais densas
-    model.add(layers.Dense(64, activation='relu'))
+    model.add(layers.Dense(256, activation='relu'))
     model.add(layers.Dense(num_classes, activation='softmax'))
 
     model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])

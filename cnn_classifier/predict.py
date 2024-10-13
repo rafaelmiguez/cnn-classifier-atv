@@ -4,7 +4,6 @@ import numpy as np
 from tensorflow import keras
 
 from params import img_size, color_mode
-from .utils import zoom_img
 
 
 def run():
@@ -19,8 +18,7 @@ def run():
             with Image.open(img_path) as img:
                 img = img.convert(color_mode)
                 img = img.resize((img_size, img_size))
-                img = zoom_img(img)
-                img_arr = np.array(img) / 255.
+                img_arr = np.array(img)
                 imgs_arrs.append(img_arr)
 
     predictions = model.predict(np.array(imgs_arrs))
