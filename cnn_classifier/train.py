@@ -43,19 +43,18 @@ def run():
 
     print('Creating model...')
     num_classes = len(os.listdir('imgs'))
+    input_shape = train_imgs_arr.shape[1:]
     model = models.Sequential()
 
-    input_shape = train_imgs_arr.shape[1:]
+    model.add(layers.Rescaling(1. / 255, input_shape=input_shape))
     data_augmentation = models.Sequential(
         [
-            layers.RandomFlip(
-                "horizontal", input_shape=input_shape),
+            layers.RandomFlip("horizontal"),
             layers.RandomRotation(0.1),
             layers.RandomZoom(0.1),
         ]
     )
     model.add(data_augmentation)
-    model.add(layers.Rescaling(1. / 255))
 
     # Camadas de convolução
     model.add(layers.Conv2D(16, 3, activation='relu'))
