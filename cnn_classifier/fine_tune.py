@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import keras
 from keras import layers
-from keras.applications.resnet50 import ResNet50
 
 from params import fine_tune_epochs, optimizer, loss, fine_tune_num_layers
 
@@ -47,27 +46,28 @@ def run():
     num_classes = len(os.listdir('imgs'))
     input_shape = train_imgs_arr.shape[1:]
 
-    ResNet50_conv_base = ResNet50(
-        weights='imagenet',
-        include_top=False,
-        input_shape=input_shape
-    )
+    print('Loading model with ImageNet weights...')
+    vgg16_conv_base = keras.applications.vgg16.VGG16(input_shape=input_shape,
+                                                     # We will supply our own top.
+                                                     include_top=False,
+                                                     weights='imagenet',
+                                                     )
 
     # Set all layers in the convolutional base to Trainable (will FREEZE initial layers further below).
-    ResNet50_conv_base.trainable = True
+    vgg16_conv_base.trainable = True
 
     # Specify the number of layers to fine tune at the end of the convolutional base.
-    num_layers = len(ResNet50_conv_base.layers)
+    num_layers = len(vgg16_conv_base.layers)
 
     # Freeze the initial layers in the convolutional base.
-    for model_layer in ResNet50_conv_base.layers[:num_layers - fine_tune_num_layers]:
+    for model_layer in vgg16_conv_base.layers[:num_layers - fine_tune_num_layers]:
         model_layer.trainable = False
 
     inputs = keras.Input(shape=input_shape)
 
-    x = keras.applications.resnet.preprocess_input(inputs)
+    x = keras.applications.vgg16.preprocess_input(inputs)
 
-    x = ResNet50_conv_base(x)
+    x = vgg16_conv_base(x)
 
     x = layers.Dropout(0.2)(x)
     x = layers.Flatten()(x)
