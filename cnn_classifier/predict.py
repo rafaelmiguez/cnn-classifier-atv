@@ -3,11 +3,11 @@ from PIL import Image
 import numpy as np
 from tensorflow import keras
 
-from params import img_size, color_mode
+from params import img_size, color_mode, test_model
 
 
 def run():
-    model = keras.models.load_model('tmp/model')
+    model = keras.models.load_model(f'tmp/{test_model}')
     labels = os.listdir('imgs')
     filenames = []
     imgs_arrs = []

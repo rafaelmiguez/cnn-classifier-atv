@@ -12,18 +12,26 @@ Sites como o [Kaggle](https://www.kaggle.com/) e [images.cv](https://images.cv/)
 
 ```python
 color_mode = 'RGB'
-img_size = 64
+img_size = 32
 
 optimizer = 'adam'
 loss = 'sparse_categorical_crossentropy'
-epochs = 10
+epochs = 50
+
+fine_tune_epochs = 10
+fine_tune_num_layers = 8
+
+test_model = "fine_tunel_model"
 ```
 
 * `color_mode`: Modo de cor das imagens pré-processadas. Pode ser 'L' para escala de cinza e 'RGB' para a escala RGB
 * `img_size`: Valor para o qual as imagens serão redimensionadas
 * `optimizer`: Algoritmo usado para ajustar pesos do modelo durante treinamento. Ver mais [aqui](https://keras.io/api/optimizers/)
 * `loss`: Função de perda (ou função custo) que mede o quanto as previsões do modelo estão se afastando dos valores esperados. Ver mais [aqui](https://keras.io/api/losses/)
-* `epochs`: Quantidade de épocas do treinamento
+* `epochs`: Quantidade de épocas do treinamento do zero usando Tensorflow
+* `fine_tune_epochs`: Quantidade de épocas de treinamento no treinamento usando *transfer learning*
+* `fine_tune_num_layers`: Número de camadas que serão descongeladas e treinadas no treinamento usando *transfer learning*
+* `test_model`: Modelo que será usado na predição. Pode ser `model` para o modelo treinado do zero ou `fine_tune_model` para o modelo treinado usando *transfer learning*
 
 As imagens de treinamento devem ser salvas na pasta `imgs`. Esta pasta deve conter subpastas que por sua vez conterão as imagens. O nome de cada subpasta irá representar o nome da classe das imagens contidas nela. Por padrão, a pasta `imgs` contem as subpastas `daisy`, `rose` e `rapeseed`, contendo imagens de flores das respectivas classes.
 
@@ -45,7 +53,13 @@ Este comando irá gerar a pasta `tmp` contendo as imagens pré-processadas.
 
 `poetry run train`
 
-Este comando irá exportar o modelo treinado para o arquivo `tmp/model.keras`.
+Este comando irá exportar o modelo treinado para `tmp/model`.
+
+OU
+
+`poetry run fine_tune`
+
+Este comando irá exportar o modelo treinado para `tmp/fine_tunel_model`.
 
 ## Classificando Imagens
 

@@ -79,8 +79,9 @@ def run():
     # The final model.
     model_ResNet50_finetune = keras.Model(inputs, outputs)
 
-    model_ResNet50_finetune.compile(
-        optimizer=optimizer, loss=loss, metrics=['accuracy'])
+    # model_ResNet50_finetune.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
+    model_ResNet50_finetune.compile(optimizer=keras.optimizers.Adam(
+        learning_rate=0.0001), loss=loss, metrics=['accuracy'])
 
     print('Training model...')
     model_ResNet50_finetune.fit(
@@ -90,4 +91,4 @@ def run():
     print('\nTest accuracy:', test_acc)
 
     print('Exporting model...')
-    model_ResNet50_finetune.save('tmp/model')
+    model_ResNet50_finetune.save('tmp/fine_tunel_model')
