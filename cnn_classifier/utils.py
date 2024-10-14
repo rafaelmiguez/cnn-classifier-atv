@@ -1,6 +1,11 @@
 import os
 import shutil
 
+from matplotlib import pyplot as plt
+from matplotlib.ticker import FormatStrFormatter, MultipleLocator
+
+from params import epochs
+
 
 def clear_folder(folder: str):
     if os.path.exists(folder):

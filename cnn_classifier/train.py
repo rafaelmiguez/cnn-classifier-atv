@@ -80,4 +80,4 @@ def run():
     print('\nTest accuracy:', test_acc)
 
     print('Exporting model...')
-    model.save('tmp/model.keras')
+    model.save('tmp/model')

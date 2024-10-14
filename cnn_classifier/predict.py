@@ -7,7 +7,7 @@ from params import img_size, color_mode
 
 
 def run():
-    model = keras.models.load_model('tmp/model.keras')
+    model = keras.models.load_model('tmp/model')
     labels = os.listdir('imgs')
     filenames = []
     imgs_arrs = []

@@ -19,6 +19,7 @@ tensorflow-intel = {version="^2.15.0", platform = "win32"}
 [tool.poetry.scripts]
 preprocess = "cnn_classifier.preprocess:run"
 train = "cnn_classifier.train:run"
+fine_tune = "cnn_classifier.fine_tune:run"
 predict = "cnn_classifier.predict:run"
 
 [build-system]
