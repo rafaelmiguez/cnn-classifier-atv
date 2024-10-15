@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 import keras
 from keras import layers
 
-from params import fine_tune_epochs, optimizer, loss, fine_tune_num_layers
+from params import fine_tune_epochs, loss, fine_tune_num_layers
 
 
 le = LabelEncoder()
@@ -77,18 +77,17 @@ def run():
     outputs = layers.Dense(num_classes, activation='softmax')(x)
 
     # The final model.
-    model_ResNet50_finetune = keras.Model(inputs, outputs)
+    model_vgg16_finetune = keras.Model(inputs, outputs)
 
-    # model_ResNet50_finetune.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
-    model_ResNet50_finetune.compile(optimizer=keras.optimizers.Adam(
+    model_vgg16_finetune.compile(optimizer=keras.optimizers.Adam(
         learning_rate=0.0001), loss=loss, metrics=['accuracy'])
 
     print('Training model...')
-    model_ResNet50_finetune.fit(
+    model_vgg16_finetune.fit(
         train_imgs_arr, train_labels, epochs=fine_tune_epochs)
 
-    _, test_acc = model_ResNet50_finetune.evaluate(test_imgs_arr, test_labels)
+    _, test_acc = model_vgg16_finetune.evaluate(test_imgs_arr, test_labels)
     print('\nTest accuracy:', test_acc)
 
     print('Exporting model...')
-    model_ResNet50_finetune.save('tmp/fine_tunel_model')
+    model_vgg16_finetune.save('tmp/fine_tunel_model')
