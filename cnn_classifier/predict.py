@@ -23,4 +23,7 @@ def run():
 
     predictions = model.predict(np.array(imgs_arrs))
     for filename, prediction in zip(filenames, predictions):
-        print(f'{filename}: {labels[np.argmax(prediction)]}')
+        best_prediction_idx = np.argmax(prediction)
+        best_prediction = prediction[best_prediction_idx]
+        print(
+            f'{filename}: {labels[best_prediction_idx]} ({best_prediction * 100:.2f}%)')
