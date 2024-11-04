@@ -63,27 +63,8 @@ Este comando irá exportar o modelo treinado para `tmp/fine_tunel_model`.
 
 ## Classificando Imagens
 
-`poetry run classify`
+`poetry run predict`
 
 Este comando irá classificar as imagens geradas na pasta `predict_imgs`, printando os resultados a exemplo do visto abaixo.
 
-```
-daisy1.png: daisy
-daisy2.png: daisy
-daisy3.png: daisy
-daisy4.png: daisy
-daisy5.png: daisy
-daisy6.png: daisy
-rapeseed1.png: rapeseed
-rapeseed2.png: rapeseed
-rapeseed3.png: rapeseed
-rapeseed4.png: daisy
-rapeseed5.png: rapeseed
-rapeseed6.png: daisy
-rose1.png: rose
-rose2.png: rose
-rose3.png: rose
-rose4.png: rose
-rose5.png: rose
-rose6.png: rose
-```
+![imagem](teste.png)
