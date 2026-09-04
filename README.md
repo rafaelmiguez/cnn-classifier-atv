@@ -1,70 +1,78 @@
-# Sobre o Projeto
+# CNN Image Classifier
 
-Este é projeto de um pacote Python capaz de treinar um classificador CNN(Convolutional Neural Network) de imagens.
+A Python project for training and evaluating convolutional neural networks (CNNs) for image classification. Developed as part of an Advanced Topics in Scientific Initiation course.
 
-# Obtenção de Imagens
+## Overview
 
-Sites como o [Kaggle](https://www.kaggle.com/) e [images.cv](https://images.cv/) podem ser usados para obter a base de dados das imagens. Note que pode ser interessante remover ou filtrar algumas imagens obtidas destes sites por não serem ideais para certas aplicações de ML.
+The project provides a reproducible workflow for preparing image datasets, training a CNN from scratch, fine-tuning a model with transfer learning, and running predictions on new images.
 
-# Configuração de Parâmetros
+## Technology
 
-É possível configurar os parâmetros de pré-processamento e treino pelo arquivo `params.py`. Segue abaixo um exemplo desse arquivo.
+- Python
+- TensorFlow / Keras
+- Poetry
+- NumPy and image-processing utilities
 
-```python
-color_mode = 'RGB'
-img_size = 32
+## Dataset layout
 
-optimizer = 'adam'
-loss = 'sparse_categorical_crossentropy'
-epochs = 50
+Training images should be organized in class-specific subdirectories:
 
-fine_tune_epochs = 10
-fine_tune_num_layers = 8
-
-test_model = "fine_tunel_model"
+```
+imgs/
+├── class_a/
+├── class_b/
+└── class_c/
 ```
 
-* `color_mode`: Modo de cor das imagens pré-processadas. Pode ser 'L' para escala de cinza e 'RGB' para a escala RGB
-* `img_size`: Valor para o qual as imagens serão redimensionadas
-* `optimizer`: Algoritmo usado para ajustar pesos do modelo durante treinamento. Ver mais [aqui](https://keras.io/api/optimizers/)
-* `loss`: Função de perda (ou função custo) que mede o quanto as previsões do modelo estão se afastando dos valores esperados. Ver mais [aqui](https://keras.io/api/losses/)
-* `epochs`: Quantidade de épocas do treinamento do zero usando Tensorflow
-* `fine_tune_epochs`: Quantidade de épocas de treinamento no treinamento usando *transfer learning*
-* `fine_tune_num_layers`: Número de camadas que serão descongeladas e treinadas no treinamento usando *transfer learning*
-* `test_model`: Modelo que será usado na predição. Pode ser `model` para o modelo treinado do zero ou `fine_tune_model` para o modelo treinado usando *transfer learning*
+Place images to classify in `predict_imgs/`. The folder names inside `imgs/` define the target classes.
 
-As imagens de treinamento devem ser salvas na pasta `imgs`. Esta pasta deve conter subpastas que por sua vez conterão as imagens. O nome de cada subpasta irá representar o nome da classe das imagens contidas nela. Por padrão, a pasta `imgs` contem as subpastas `daisy`, `rose` e `rapeseed`, contendo imagens de flores das respectivas classes.
+## Configuration
 
-A pasta `predict_imgs` deve conter imagens definidas pelo usuário que serão usadas para testar o modelo pronto. Por padrão, esta pasta contém imagens de flores dos tipos `daisy`(margaridas), `rose`(rosas) e `rapeseed`(colzas).
+Use `params.py` to configure preprocessing and training, including:
 
-# Executando o Código
+- Image color mode and target size
+- Optimizer and loss function
+- Number of training and fine-tuning epochs
+- Number of layers to unfreeze during fine-tuning
+- Model selected for prediction
 
-## Instalando Depedências
+## Running the project
 
-`poetry install`
+Install the dependencies with Poetry:
 
-## Realizando Pré-processamento
+```bash
+poetry install
+```
 
-`poetry run preprocess`
+Preprocess the training images:
 
-Este comando irá gerar a pasta `tmp` contendo as imagens pré-processadas.
+```bash
+poetry run preprocess
+```
 
-## Realizando Treinamento
+Train a CNN from scratch or fine-tune a model:
 
-`poetry run train`
+```bash
+poetry run train
+poetry run fine_tune
+```
 
-Este comando irá exportar o modelo treinado para `tmp/model`.
+Run predictions on the images in `predict_imgs/`:
 
-OU
+```bash
+poetry run predict
+```
 
-`poetry run fine_tune`
+Generated models and intermediate files are written to the project's `tmp/` directory according to the selected configuration.
 
-Este comando irá exportar o modelo treinado para `tmp/fine_tunel_model`.
+## Project structure
 
-## Classificando Imagens
+- `cnn_classifier/` — preprocessing, training, fine-tuning, and prediction modules
+- `imgs/` — training dataset organized by class
+- `predict_imgs/` — images used for inference
+- `params.py` — experiment configuration
+- `ROTEIRO_TENSORFLOW.md` and `ROTEIRO_FINE_TUNNING.md` — supporting experiment notes
 
-`poetry run predict`
+## Notes
 
-Este comando irá classificar as imagens geradas na pasta `predict_imgs`, printando os resultados a exemplo do visto abaixo.
-
-![imagem](teste.png)
+This repository contains an academic machine-learning project and is intended for study and experimentation. Model performance depends on the dataset, preprocessing choices, and training configuration.
