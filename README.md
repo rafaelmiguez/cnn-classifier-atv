@@ -1,6 +1,11 @@
 # CNN Image Classifier
 
-A Python project for training and evaluating convolutional neural networks (CNNs) for image classification. Developed as part of an Advanced Topics in Scientific Initiation course.
+An academic coursework fork for exploring image classification with Python, TensorFlow/Keras, and Poetry.
+
+## Origin and attribution
+
+This repository is based on [RafaSantos484/cnn-classifier](https://github.com/RafaSantos484/cnn-classifier). The original project provides the foundation for the training, fine-tuning, and prediction workflows documented below. This fork is retained as a record of coursework and learning; it does not claim independent authorship of the original implementation. See the [license](./LICENSE) and repository history for attribution.
+
 
 ## Overview
 
